@@ -1,0 +1,62 @@
+<%- include('include/header.ejs')%>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<body>
+    <a href="/users/" style="text-decoration: none; color:black;"><h1 style="text-align: center;">Times of Ambala</h1></a>
+    <%- include('include/admin-nav.ejs')%>
+    <div class="container mt-5">
+        <h2> All Catagory Information</h2>
+       <a href="/admin/add-catagory"> <button class="btn btn-outline-secondary">Add New Catagory</button></a>
+        <table class="table">
+         
+          <thead>
+            <tr>
+              <th scope="col">Sr. No</th>
+              <th scope="col">Name</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% let count = 1; %>
+            <% cat.forEach(c =>{%>
+            <tr>
+              <td><%= count %></td>
+              <td><%= c.category%></td>
+              <td>
+             <a href="/admin/edit-catagory/<%=c._id%>">   <button class="btn btn-outline-success">Edit</button></a>
+             <form action="/admin/delete-category/<%=c._id%>" method="post" style="display: inline;" onsubmit="return false;">
+              <button class="btn btn-outline-danger ajax-delete" data-category-id="<%=c._id%>">Delete</button>
+          </form>
+              </td>
+            </tr>
+            <% count++; %>
+           <%})%>
+          </tbody>
+        </table>
+      </div>
+    
+      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('.ajax-delete').on('click', function(e) {
+        e.preventDefault();
+
+        var categoryId = $(this).data('category-id');
+        var $button = $(this); 
+
+        $.ajax({
+            url: `/admin/delete-category/${categoryId}`,
+            type: 'POST',
+            success: function(response) {
+                console.log('Category deleted:', response);
+                $button.closest('tr').remove();
+            },
+            error: function(xhr, status, error) {
+                console.error('Error deleting category:', error);
+            }
+        });
+    });
+});
+</script>
+    
+
+<%- include('include/footer.ejs')%>

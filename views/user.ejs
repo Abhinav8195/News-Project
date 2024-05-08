@@ -1,0 +1,81 @@
+<%- include('include/header.ejs')%>
+<style>
+  .card__image img:hover {
+    transform: scale(1.1); 
+  }
+</style>
+<body style="background-color: aquamarine;">
+  <div style="width: 80%; margin:auto;">
+    
+    <a href="/users/" style="text-decoration: none; color:black;"><h1 style="text-align: center;">Times of Ambala</h1></a>
+    <div>
+    <%- include('include/nav.ejs')%>
+  </div>
+  <div>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+          <li class="page-item">
+              <a class="page-link" href="/users?page=1">First</a>
+          </li>
+          <% for(let i = 1; i <= pages; i++) { %>
+              <li class="page-item <% if (currentPage === i) { %>active"><a class="page-link" href="#"><%=i%></a></li>
+              <%} else { %>
+              <li class="page-item"><a class="page-link" href="/users?page=<%=i%>"><%=i%></a></li>
+              <%} %>
+          <% } %>
+          <li class="page-item">
+              <a class="page-link" href="/users?page=<%=pages%>">Last</a>
+          </li>
+      </ul>
+  </nav>
+  </div>
+    <% console.log("Original data:", data); %>
+    <% data = data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)); %>
+    <% console.log("Sorted data:", data); %>
+   
+      <div style="width: 65%; box-sizing:border-box; float:left; border-right:1px solid black; margin-top:20px;">
+        <% data.forEach((item, index) => { %>
+
+        <div class="grid" style="width: auto; margin-left:50px;" >
+          <article class="card product-item">
+            <div class="card__image" style="margin:auto;padding-top:20px;width:auto;">
+              <a href="/users/details/<%=item._id%>" target="_blank"><img src="/uploads/<%= item.image %>" alt="<%= item.title %>" width="300px"  style="border-radius:10px; transform-origin: center center; transition: transform 0.3s;"></a>
+            </div> 
+            <br>
+            <header class="card__header" style="margin:auto;">
+              <a href="/users/details/<%=item._id%>" target="_blank" style="text-decoration: none; color:black;"><h1 class="product__title"><%= item.title %></h1></a>
+            </header>
+            <div class="card__content">
+              <p class="product__description" style="height: 20px; overflow:hidden;"><%= item.description %></p>
+              <a href="/users/details/<%=item._id%>" target="_blank"><button type="button" class="btn btn-warning btn-small">Read More</button></a>
+            </div>
+          </article>
+        </div>
+      
+        <% if (index === data.length - 1) { %>
+          <% console.log("Rendering completed."); %>
+        <% } %>
+      <% }) %>
+      </div>
+      
+    <div style="width: 35%;border:1px solid black;box-sizing:border-box;float:right;margin-top:20px;">
+      <div class="grid" style="width: 90%;margin:auto; " >
+        <h1 style="text-align:center;">Recent News</h1>
+        <% data.forEach((item) => { %>
+        <div style="border:1px solid black;background-color:white;height:100px;overflow:hidden;">
+          <div style="width: 50%;float:left;box-sizing:border-box;">
+            <a href="/users/details/<%=item._id%>" target="_blank"><img src="/uploads/<%= item.image %>" alt="<%= item.title %>" width="150px"  style="border-radius:10px;"></a>
+          </div> 
+          <div style="width: 49%;display:inline;overflow:hidden;">
+            <a href="/users/details/<%=item._id%>" target="_blank" style="text-decoration: none; color:black;overflow:hidden;"><h4 class="product__title"><%= item.title %></h4></a>
+          </div>
+        </div> 
+        <br>
+        <% }) %>
+      </div>
+      
+   </div>
+  
+  </div>
+  <%- include('include/footer.ejs')%>
+

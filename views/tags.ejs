@@ -1,0 +1,39 @@
+<%- include('include/header.ejs')%>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<body>
+    <a href="/users/" style="text-decoration: none; color:black;"><h1 style="text-align: center;">Times of Ambala</h1></a>
+    <%- include('include/admin-nav.ejs')%>
+    <div class="container mt-5">
+        <h2> All Tags Information</h2>
+       <a href="/admin/add-tag"> <button class="btn btn-outline-secondary">Add New Tags</button></a>
+        <table class="table">
+         
+          <thead>
+            <tr>
+              <th scope="col">Sr. No</th>
+              <th scope="col">Name</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% let count = 1; %>
+            <% tag.forEach(t =>{%>
+            <tr>
+              <td><%=count%></td>
+              <td><%= t.tag%></td>
+              <td>
+             <a href="/admin/edit-tag/<%=t._id%>">   <button class="btn btn-outline-success">Edit</button></a>
+             <form action="/admin/tag-delete/<%=t._id%>" method="post" style="display: inline;">   
+             <button class="btn btn-outline-danger">Delete</button>
+            </form>
+              </td>
+            </tr>
+            <% count++; %>
+           <%})%>
+          </tbody>
+        </table>
+      </div>
+    
+     
+
+<%- include('include/footer.ejs')%>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigation Bar</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    
+    .navbar-custom {
+      background-color: #343a40;
+    }
+    .navbar-custom .navbar-brand,
+    .navbar-custom .navbar-nav .nav-link {
+      color: #ffffff; 
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom">
+  <div class="container">
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav" id="category-list">
+      
+      </ul>
+       
+    </div>
+  </div>
+</nav>
+
+<!-- Bootstrap JS (optional if you need dropdowns or other interactive features) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+  window.onload = function() {
+    fetch('/admin/categories')
+      .then(response => response.json())
+      .then(categories => {
+        const categoryList = document.getElementById('category-list');
+          categories.forEach(category => {
+          const listItem = document.createElement('li');
+          listItem.classList.add('nav-item');
+          const link = document.createElement('a');
+          link.classList.add('nav-link');
+          link.href = '/users/' + category.category; 
+          link.textContent = category.category;   
+          listItem.appendChild(link);
+          categoryList.appendChild(listItem);
+        });
+      })
+      .catch(error => console.error('Error fetching categories:', error));
+  };
+</script>
+
+</body>
+</html>
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar Example</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/users/">TOA <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/users/business">Business</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/users/education">Education</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/users/politics">Politics</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/users/tech">Tech</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/users/sports">Sports</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/users/entertainment">Entertainment</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/users/world">World</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/users/life">life & Style</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/">Admin-Panel</a>
+      </li> -->
+       
+<!-- 
+      <div style="margin-left:5%;">
+      <form class="d-flex" >
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      </div> 
+    </ul>
+  </div>
+</nav> -->
+
+<!-- Bootstrap JS and jQuery (optional) -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>  -->

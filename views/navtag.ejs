@@ -1,0 +1,39 @@
+<%- include('include/header.ejs') %>
+<style>
+  .card__image img:hover {
+    transform: scale(1.1); /* Adjust the scale factor as needed */
+  }
+</style>
+<body style="background-color: aquamarine;">
+  <div style="width: 80%; margin: auto;">
+    <a href="/users/" style="text-decoration: none; color: black;"><h1 style="text-align: center;">Times of Ambala</h1></a>
+    <%- include('include/nav.ejs') %>
+  
+    <div style="margin: auto; margin-top: 40px;">
+      <div class="grid" style="width: auto; margin-left: 50px;">
+        <% if (data.length > 0) { %>
+          <% data.forEach(news => { %>
+            <article class="card product-item">
+              <div class="card__image" style="margin: auto;">
+                <img src="/uploads/<%= news.image %>" alt="<%= news.title %>" width="600px" height="300px" style="border-radius: 10px; transform-origin: center center; transition: transform 0.3s;">
+              </div> 
+              <br>
+              <header class="card__header" style="margin: auto;">
+                <h1 class="product__title"><%= news.title %></h1>
+              </header>
+              
+              <div class="card__content" style="margin: auto;">
+                <p class="product__description"><%= news.description %></p>
+              </div>
+            </article>
+          <% }); %>
+        <% } else { %>
+          <div style="text-align: center; padding: 20px;">
+            <p>No data available.</p>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  
+<%- include('include/footer.ejs') %>

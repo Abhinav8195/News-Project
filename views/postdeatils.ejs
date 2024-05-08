@@ -1,0 +1,36 @@
+<%- include('include/header.ejs')%>
+<style>
+  .card__image img:hover {
+    transform: scale(1.1); /* Adjust the scale factor as needed */
+}
+</style>
+<body>
+
+  <a href="/users/" style="text-decoration: none; color:black;"><h1 style="text-align: center;">Times of Ambala</h1></a>
+  <%- include('include/admin-nav.ejs')%>
+     
+     
+<div style="margin:auto;margin-top:40px;">
+  <div class="grid" style="width: auto;margin-left:50px;" >
+    <article class="card product-item">
+      <div class="card__image" style="margin: auto;">
+      <img src="/uploads/<%= data.image %>" alt="<%= data.title %>" width="600px" height="300px" style="border-radius:10px;transform-origin: center center; transition: transform 0.3s;">
+   </div> 
+   <br>
+      <header class="card__header" style="margin:auto;">
+           <h1 class="product__title"><%= data.title%></h1>
+      </header>
+        
+        <div class="card__content"style="margin:auto;">
+            <p class="product__description" ><%= data.description%></p>
+            
+             
+        </div>
+     
+        
+    </article>
+</div>
+</div>
+
+</div>
+  <%- include('include/footer.ejs')%>

@@ -1,0 +1,79 @@
+<%- include('include/header.ejs')%>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://kit.fontawesome.com/f2898c5e0b.js" crossorigin="anonymous"></script>
+<style>
+  .action-column {
+    width: 200px; 
+}.page-item.active .page-link {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+</style>
+<body>
+    <a href="/users/" style="text-decoration: none; color:black;"><h1 style="text-align: center;">Times of Ambala</h1></a>
+    <%- include('include/admin-nav.ejs')%>
+    
+    <div class="form-container" style="width: 80%; margin: auto;">
+        <h2> All Post Information</h2>
+        <a href="/admin/addnews"> <button class="btn btn-outline-secondary">Add News</button></a>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Sr. No</th>
+              <th scope="col">Post Title</th>
+              <th scope="col">Category</th>
+              <th scope="col">Date</th>
+              <th scope="col" class="action-column">Action</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% let count = 1; %>
+            <%news.forEach(news=>{ %>
+            <tr>
+              <td><%=count%></td>
+              <td><%=news.title%></td>
+              <td><%=news.category%></td>
+              <td><%=news.timestamp%></td>
+              <td>
+              <a href="/admin/post-details/<%=news._id%>" target="_blank">  <button class="btn btn-primary btn-sm"><i class="fa-solid fa-eye fa-fade"></i></button></a>
+              <a href="/admin/update/<%=news._id%>" > <button class="btn btn-success btn-sm"><i class="fa-solid fa-pen"></i></button></a>
+              
+              <form action="/admin/delete/<%=news._id%>" method="post" style="display: inline;">
+                <button class="btn btn-danger btn-sm" style="display:inline ;"><i class="fa-solid fa-trash"></i></button>
+              </form>
+              <% if (news.status === 'draft') { %>
+                <form action="/admin/publish/<%= news._id %>" method="post" style="display: inline;">
+                  <button class="btn btn-info btn-sm" style="display: inline;">Publish</button>
+                </form>
+              <% } %>
+              </td>
+              <td><%=news.status%></td>
+            </tr>
+            <% count++; %>
+            <%})%>
+          </tbody>
+        </table>
+      </div>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="/admin?page=1">First</a>
+            </li>
+            <% for(let i = 1; i <= pages; i++) { %>
+                <li class="page-item <% if (currentPage === i) { %>active"><a class="page-link" href="#"><%=i%></a></li>
+                <%} else { %>
+                <li class="page-item"><a class="page-link" href="/admin?page=<%=i%>"><%=i%></a></li>
+                <%} %>
+            <% } %>
+            <li class="page-item">
+                <a class="page-link" href="/admin?page=<%=pages%>">Last</a>
+            </li>
+        </ul>
+    </nav>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        
+<%- include('include/footer.ejs')%>

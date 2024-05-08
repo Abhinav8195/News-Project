@@ -1,0 +1,55 @@
+<%- include('include/header.ejs')%>
+<link rel="stylesheet" href="/stylesheets/add.css">
+<body>
+  <div style="width: 90%;margin:auto;">
+  <a href="/users/" style="text-decoration: none; color:black;"><h1 style="text-align: center;">Times of Ambala</h1></a>
+  <%- include('include/admin-nav.ejs')%>
+  <div class="form-container">
+    <h2>Add Latest News</h2>
+    <form action="/admin/addnews" id="newsForm" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="title">Heading:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <% categories.forEach(category => { %>
+                    <option><%= category.category %></option>
+                <% }); %>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="tags">Tags:</label>
+            <select id="tags" name="tags" multiple required>
+                <% tags.forEach(tag => { %>
+                    <option><%= tag.tag %></option>
+                <% }); %>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            
+            <button class="btn btn-success" type="submit" name="action" value="publish">Publish</button>
+            <button class="btn btn-info" type="submit" name="action" value="draft">Save Draft</button>
+        </div>
+    </form>
+</div>
+<!-- <script>
+    function handleSubmit(event) {
+      const action = event.submitter.value;
+      document.getElementById('action').value = action;
+    }
+    document.getElementById('newsForm').addEventListener('submit', handleSubmit);
+  </script> -->
+  
+  <%- include('include/footer.ejs')%>

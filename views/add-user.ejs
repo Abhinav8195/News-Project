@@ -1,0 +1,44 @@
+<%- include('include/header.ejs')%>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<body>
+    <a href="/users/" style="text-decoration: none; color:black;"><h1 style="text-align: center;">Times of Ambala</h1></a>
+    <%- include('include/admin-nav.ejs')%>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                User Registration
+              </div>
+              <div class="card-body">
+                <form action="/admin/reg-user" method="post">
+                  <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" name="username" placeholder="Enter username">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+                  </div>
+                  <div class="form-group">
+                    <input type="checkbox" id="navbar" name="isadmin" value="true">
+             <label for="navbar">Is Admin</label><br>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <%- include('include/footer.ejs')%>

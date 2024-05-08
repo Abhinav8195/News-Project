@@ -1,0 +1,41 @@
+<%- include('include/header.ejs')%>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<body>
+    <a href="/users/" style="text-decoration: none; color:black;"><h1 style="text-align: center;">Times of Ambala</h1></a>
+    <%- include('include/admin-nav.ejs')%>
+    <div class="container mt-5">
+        <h2> All User Information</h2>
+       <a href="/admin/reg-user"> <button class="btn btn-outline-secondary">Add New User</button></a>
+        <table class="table">
+         
+          <thead>
+            <tr>
+              <th scope="col">Sr. No</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% let count = 1; %>
+            <% cat.forEach(c =>{%>
+            <tr>
+              <td><%= count %></td>
+              <td><%= c.username%></td>
+              <td><%= c.email%></td>
+              <td>
+             <!-- <a href="/admin/edit-catagory/<%=c._id%>">   <button class="btn btn-outline-success">Edit</button></a> -->
+             <form action="/admin/deleter/<%=c._id%>" method="post" style="display: inline;">   
+             <button class="btn btn-outline-danger">Delete</button>
+            </form>
+              </td>
+            </tr>
+            <% count++; %>
+           <%})%>
+          </tbody>
+        </table>
+      </div>
+    
+     
+
+<%- include('include/footer.ejs')%>
